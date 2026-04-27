@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, viewport-fit=cover">
+<meta name="theme-color" content="#C8102E">
+<meta name="format-detection" content="telephone=no, email=no, address=no, date=no">
+<meta name="x5-orientation" content="portrait">
+<meta name="x5-page-mode" content="default">
+<meta name="full-screen" content="no">
+<meta name="screen-orientation" content="portrait">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>AMCA · 巴黎国际电影学院 · 2026 暑期电影集训营</title>
+<style>
+:root {
+  color-scheme: light;
+  /* === AMCA brand color blocks (reverse-engineered from PDF) === */
+  --red:    #C8102E;   /* primary brand red — cover, P14, P19, contact accents */
+  --orange: #DC4830;   /* warm coral — Eiffel P15, Moulin Rouge P18 */
+  --pink:   #DA2F65;   /* hot magenta — Versailles P16 */
+  --wine:   #4A2585;   /* deep aubergine — Location, About, Café, Grand Rex */
+  --paper:  #FFFFFF;
+  --paper-2:#FAF7F2;   /* very subtle cream paper-stock */
+  --ink:    #181818;
+  --ink-2:  rgba(24,24,24,0.7);
+  --ink-3:  rgba(24,24,24,0.42);
+  --line:   rgba(24,24,24,0.12);
+  --night:  #111111;   /* P21 contact bg */
+  /* === Fonts === */
+  --sans-zh: "PingFang SC", "Microsoft YaHei", "HarmonyOS Sans", "Source Han Sans SC", "Source Han Sans CN", "Noto Sans SC", "OPPO Sans", system-ui, sans-serif;
+  --sans-en: "Inter", "Helvetica Neue", "Arial", system-ui, sans-serif;
+  --mono:   "SF Mono", "JetBrains Mono", "Menlo", "Monaco", "Courier New", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans-zh);
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
+  overflow-x: hidden;
+  letter-spacing: 0;
+}
+
+/* ============ Top bar (AMCA logo always red) ============ */
+.topbar {
+  position: fixed; top: 0; left: 0; width: 100%;
+  z-index: 60;
+  padding: 18px 22px;
+  padding-top: calc(18px + env(safe-area-inset-top, 0px));
+  padding-left: calc(22px + env(safe-area-inset-left, 0px));
+  padding-right: calc(22px + env(safe-area-inset-right, 0px));
+  display: flex; align-items: center; justify-content: space-between;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
+.topbar .logo {
+  font-family: var(--sans-en);
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: 4px;
+  color: var(--red);
+  pointer-events: auto;
+  background: rgba(255,255,255,0.9);
+  padding: 6px 12px;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.topbar .ticker {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--ink);
+  background: rgba(255,255,255,0.9);
+  padding: 8px 12px;
+  border-radius: 4px;
+  pointer-events: auto;
+}
+
+/* ============ Side chapter indicator ============ */
+.indicator {
+  position: fixed; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex; flex-direction: column; gap: 8px;
+  mix-blend-mode: difference;
+  pointer-events: auto;
+}
+.indicator a {
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.6);
+  display: block;
+  transition: width .35s ease, background .35s ease;
+  cursor: pointer;
+}
+.indicator a.active { width: 32px; background: #FFFFFF; }
+
+/* ============ Section base ============ */
+section {
+  min-height: 100vh;
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============ Reveal animations ============ */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal.d1 { transition-delay: .1s; }
+.reveal.d2 { transition-delay: .2s; }
+.reveal.d3 { transition-delay: .3s; }
+.reveal.d4 { transition-delay: .4s; }
+.reveal.d5 { transition-delay: .5s; }
+
+/* color-block slide-in */
+.slide-block {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: opacity .8s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);
+}
+.slide-block.in { opacity: 1; transform: scaleX(1); }
+.slide-block.from-right { transform-origin: right center; }
+
+/* ============ Industrial labels ============ */
+.tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ============ Image placeholder ============ */
+.img-ph {
+  position: relative;
+  border: 1.5px dashed rgba(0,0,0,0.18);
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(0,0,0,0.025) 14px, rgba(0,0,0,0.025) 15px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--ink-2);
+  overflow: hidden;
+}
+.img-ph.on-color {
+  border-color: rgba(255,255,255,0.4);
+  background: repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(255,255,255,0.06) 14px, rgba(255,255,255,0.06) 15px);
+  color: rgba(255,255,255,0.85);
+}
+.img-ph .ph-icon {
+  width: 28px; height: 28px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.img-ph .ph-icon svg { width: 14px; height: 14px; }
+.img-ph .ph-id {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+.img-ph .ph-desc {
+  font-family: var(--sans-zh);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 240px;
+}
+/* image-loaded state */
+.img-ph.img-loaded {
+  border: none;
+  background: var(--ink);
+  padding: 0;
+}
+.img-ph.img-loaded > * { display: none; }
+.img-ph.img-loaded > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+.img-ph.img-loaded > img.shown { opacity: 1; }
+
+/* ============================================ */
+/* P1 · COVER — red top half + photo bottom    */
+/* ============================================ */
+.p-cover {
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100svh;
+}
+.p-cover .top {
+  flex: 1 1 50%;
+  background: var(--red);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 100px 28px 32px;
+  padding-top: calc(100px + env(safe-area-inset-top, 0px));
+  position: relative;
+}
+.p-cover .top::after {
+  /* AMCA-style geometric corner accent (matches the small white corner block in PDF) */
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 56px; height: 56px;
+  background: var(--paper);
+  clip-path: polygon(40% 0, 100% 0, 100% 60%, 75% 60%, 75% 35%, 40% 35%);
+}
+.p-cover .top .badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1.5px solid var(--paper);
+  border-radius: 999px;
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  align-self: flex-start;
+}
+.p-cover .top h1 {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: clamp(56px, 17vw, 96px);
+  line-height: 0.9;
+  letter-spacing: -2.5px;
+  color: var(--paper);
+}
+.p-cover .top .h1-sub {
+  margin-top: 16px;
+  font-family: var(--sans-zh);
+  font-weight: 800;
+  font-size: clamp(22px, 6.5vw, 32px);
+  letter-spacing: -0.5px;
+  color: var(--paper);
+}
+.p-cover .top .meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: var(--paper);
+  line-height: 1.8;
+}
+.p-cover .top .meta .url {
+  display: block;
+  margin-top: 8px;
+  opacity: 0.75;
+}
+.p-cover .photo {
+  flex: 1 1 50%;
+  background: linear-gradient(180deg,
+    #2A1438 0%,
+    #4C1B5E 18%,
+    #8B2F5A 38%,
+    #FF7A66 58%,
+    #FFB678 76%,
+    #FFD9A8 92%);
+  position: relative;
+  overflow: hidden;
+}
+.p-cover .photo .skyline {
+  position: absolute;
+  bottom: 0; left: 0; width: 100%;
+  height: 70%;
+}
+.p-cover .photo .skyline svg {
+  width: 100%; height: 100%; display: block;
+}
+.p-cover.has-photo .photo {
+  background: var(--cover-photo) center/cover no-repeat;
+}
+.p-cover.has-photo .photo .skyline { display: none; }
+.p-cover .photo::after {
+  /* Gentle bottom darken to make any future caption readable */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.25) 100%);
+  pointer-events: none;
+}
+.p-cover .scroll-cue {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--paper);
+  z-index: 5;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.p-cover .scroll-cue::after {
+  content: "";
+  display: block;
+  width: 1px; height: 22px;
+  background: var(--paper);
+  margin: 6px auto 0;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 0.35; }
+}
+
+/* ============================================ */
+/* Page modules: white-paper sections           */
+/* ============================================ */
+.p-paper {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 80px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.p-paper .head .tag { color: var(--red); margin-bottom: 14px; display: block; }
+.p-paper .head h2 {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: clamp(40px, 12vw, 64px);
+  line-height: 0.95;
+  letter-spacing: -2px;
+  color: var(--red);
+}
+.p-paper .head .sub {
+  margin-top: 8px;
+  font-family: var(--sans-zh);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--ink);
+}
+.p-paper .body p {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin-top: 18px;
+}
+.p-paper .body p strong { color: var(--ink); font-weight: 800; }
+
+/* ============================================ */
+/* Color-block sections (P4, P6, P13, P14, P15-20) */
+/* ============================================ */
+.p-color {
+  color: var(--paper);
+  padding: 80px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.p-color.red    { background: var(--red); }
+.p-color.orange { background: var(--orange); }
+.p-color.pink   { background: var(--pink); }
+.p-color.wine   { background: var(--wine); }
+.p-color.night  { background: var(--night); }
+
+.p-color .tag { color: rgba(255,255,255,0.85); display: block; margin-bottom: 18px; }
+.p-color h2 {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: clamp(48px, 14vw, 84px);
+  line-height: 0.92;
+  letter-spacing: -2.5px;
+  color: var(--paper);
+}
+.p-color h2 .en {
+  display: block;
+  font-family: var(--sans-en);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 4px;
+  margin-top: 12px;
+  opacity: 0.85;
+}
+.p-color .body p {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.92);
+  margin-top: 18px;
+}
+.p-color .body p strong { color: var(--paper); font-weight: 800; }
+.p-color .corner-mark {
+  position: absolute;
+  top: 100px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  background: var(--paper);
+  clip-path: polygon(35% 0, 100% 0, 100% 65%, 75% 65%, 75% 35%, 35% 35%);
+  opacity: 0.95;
+}
+
+/* ============================================ */
+/* P3 / P10 · Track intro w/ photo overlay      */
+/* ============================================ */
+.p-track-overlay {
+  background: var(--ink);
+  padding: 0;
+  display: block;
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+.p-track-overlay .full-photo {
+  position: relative;
+  height: 60vh;
+  min-height: 360px;
+  background: linear-gradient(135deg, #3A1A4D 0%, #1A0A28 100%);
+  overflow: hidden;
+}
+.p-track-overlay .full-photo .img-ph {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  border: 0;
+  background: linear-gradient(135deg, #3A1A4D 0%, #1A0A28 100%);
+}
+.p-track-overlay .full-photo .img-ph::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 16px, rgba(255,255,255,0.04) 16px, rgba(255,255,255,0.04) 17px);
+}
+.p-track-overlay .full-photo .label-block {
+  position: absolute;
+  bottom: 0;
+  left: 28px;
+  right: 28px;
+  z-index: 2;
+}
+.p-track-overlay .full-photo .label-block h2 {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: clamp(56px, 18vw, 110px);
+  line-height: 0.85;
+  letter-spacing: -3px;
+  color: var(--paper);
+  text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+  margin-bottom: 18px;
+  transform: translateY(50%);
+}
+.p-track-overlay .full-photo .label-block h2 .en {
+  display: block;
+  color: var(--paper);
+}
+.p-track-overlay .full-photo.red .label-block h2 .en { color: var(--paper); }
+.p-track-overlay .body-area {
+  background: var(--paper);
+  padding: 80px 28px 80px;
+  color: var(--ink);
+}
+.p-track-overlay .body-area p {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin-top: 18px;
+}
+.p-track-overlay .body-area p:first-child { margin-top: 0; }
+.p-track-overlay .body-area p strong { color: var(--ink); font-weight: 800; }
+.p-track-overlay .accent-bar {
+  display: inline-block;
+  height: 6px;
+  width: 56px;
+  background: var(--red);
+  margin-bottom: 20px;
+}
+.p-track-overlay.acting .accent-bar { background: var(--wine); }
+.p-track-overlay.acting .full-photo {
+  background: linear-gradient(135deg, #2A1A3D 0%, #1A0A28 100%);
+}
+
+/* ============================================ */
+/* WEEK schedule cards (P8, P9, P11, P12)        */
+/* ============================================ */
+.weeks-paper {
+  background: var(--paper);
+  padding: 80px 28px;
+}
+.weeks-paper .head h2 {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: clamp(36px, 10vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -1.5px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.weeks-paper .head h2 em { font-style: normal; color: var(--red); }
+.weeks-paper.acting .head h2 em { color: var(--wine); }
+.weeks-paper .head .tag {
+  color: var(--ink-2);
+  display: block;
+  margin-bottom: 14px;
+}
+.weeks-paper .head .accent-bar {
+  display: inline-block;
+  height: 4px;
+  width: 44px;
+  background: var(--red);
+  margin-bottom: 16px;
+}
+.weeks-paper.acting .head .accent-bar { background: var(--wine); }
+.week-box {
+  margin-top: 32px;
+  background: var(--red);
+  color: var(--paper);
+  padding: 28px 24px;
+  border-radius: 4px;
+}
+.weeks-paper.acting .week-box { background: var(--wine); }
+.week-box .week-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--paper);
+  opacity: 0.9;
+  margin-bottom: 6px;
+}
+.week-box h3 {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--paper);
+  margin-bottom: 6px;
+}
+.week-box .h3-en {
+  font-family: var(--sans-en);
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--paper);
+  opacity: 0.85;
+  margin-bottom: 18px;
+  display: block;
+}
+.week-box .day {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.65;
+  color: var(--paper);
+}
+.week-box .day:first-of-type { border-top: none; padding-top: 0; }
+.week-box .day .d-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  padding-top: 1px;
+  opacity: 0.95;
+}
+.week-box .day strong { color: var(--paper); font-weight: 800; }
+
+/* ============================================ */
+/* P5 · Optimal Accessibility                   */
+/* ============================================ */
+.p-access {
+  background: var(--paper);
+  padding: 80px 28px;
+  text-align: left;
+}
+.p-access .amca-mark {
+  font-family: var(--sans-en);
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: 6px;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+.p-access .amca-sub {
+  font-family: var(--sans-en);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: var(--ink-2);
+  margin-bottom: 32px;
+  text-transform: uppercase;
+}
+.p-access .addr-card {
+  border: 2px solid var(--red);
+  border-radius: 6px;
+  padding: 22px 22px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+.p-access .addr-card .addr-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.p-access .addr-card .addr {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.p-access h2 {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: clamp(36px, 10vw, 52px);
+  line-height: 0.95;
+  letter-spacing: -1.5px;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.p-access h2 em { font-style: normal; color: var(--red); }
+.p-access .body-text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin-bottom: 28px;
+}
+.p-access .transport {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 18px;
+}
+.p-access .transport-col h5 {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--red);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.p-access .transport-col ul { list-style: none; }
+.p-access .transport-col li {
+  font-family: var(--sans-zh);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--ink-2);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+.p-access .transport-col li:last-child { border-bottom: none; }
+.p-access .transport-col li strong {
+  color: var(--ink);
+  font-weight: 800;
+  margin-right: 6px;
+}
+
+/* ============================================ */
+/* P6 · Pull quote (purple)                     */
+/* ============================================ */
+.p-pullquote {
+  background: var(--wine);
+  color: var(--paper);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.p-pullquote .photo-area {
+  flex: 0 0 50%;
+  position: relative;
+  background: var(--ink);
+  min-height: 50svh;
+}
+.p-pullquote .quote-area {
+  flex: 0 0 50%;
+  padding: 56px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.p-pullquote .quote-area .mark {
+  font-family: var(--sans-en);
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 0.5;
+  margin-bottom: 22px;
+  color: var(--paper);
+  opacity: 0.7;
+}
+.p-pullquote .quote-area .text {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: clamp(28px, 8vw, 40px);
+  line-height: 1.25;
+  letter-spacing: -1px;
+}
+.p-pullquote .quote-area .text em { font-style: italic; }
+.p-pullquote .quote-area .gloss {
+  margin-top: 18px;
+  font-family: var(--sans-zh);
+  font-weight: 600;
+  font-size: 13px;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================ */
+/* P7 · Program Overview divider                */
+/* ============================================ */
+.p-divider {
+  background: var(--red);
+  color: var(--paper);
+  padding: 110px 28px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.p-divider .photo-1 {
+  height: 220px;
+  margin: 28px 0;
+}
+.p-divider .photo-2 {
+  height: 180px;
+}
+.p-divider h2 {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: clamp(56px, 17vw, 88px);
+  line-height: 0.9;
+  letter-spacing: -3px;
+  color: var(--paper);
+}
+.p-divider .corner-mark {
+  position: absolute;
+  top: 110px;
+  right: 28px;
+  width: 56px;
+  height: 56px;
+  background: rgba(255,255,255,0.95);
+  clip-path: polygon(35% 0, 100% 0, 100% 65%, 75% 65%, 75% 35%, 35% 35%);
+}
+
+/* ============================================ */
+/* P13 · About AMCA                             */
+/* ============================================ */
+.p-about {
+  background: var(--wine);
+  color: var(--paper);
+  padding: 110px 28px 80px;
+}
+.p-about .amca-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 28px;
+  align-items: flex-start;
+}
+.p-about .amca-block .logo {
+  font-family: var(--sans-en);
+  font-weight: 900;
+  font-size: 36px;
+  letter-spacing: 6px;
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.p-about .amca-block .logo::before {
+  content: "";
+  display: block;
+  width: 28px; height: 28px;
+  background: var(--paper);
+  clip-path: polygon(35% 0, 100% 0, 100% 65%, 75% 65%, 75% 35%, 35% 35%);
+}
+.p-about .amca-block .tagline {
+  font-family: var(--sans-en);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 2px;
+  opacity: 0.85;
+}
+.p-about .body p {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.85;
+  color: var(--paper);
+  opacity: 0.92;
+  margin-top: 16px;
+}
+.p-about .facility-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.p-about .facility-grid .img-ph { aspect-ratio: 4/3; min-height: 110px; }
+.p-about .facility-grid .span-2 { grid-column: 1 / -1; aspect-ratio: 16/9; }
+
+/* ============================================ */
+/* Landmark sections (P15-20) — color block + landmark info */
+/* ============================================ */
+.p-landmark {
+  padding: 110px 28px 80px;
+  position: relative;
+}
+.p-landmark .tag { color: rgba(255,255,255,0.78); display: block; margin-bottom: 14px; }
+.p-landmark h2 {
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: clamp(56px, 16vw, 88px);
+  line-height: 0.9;
+  letter-spacing: -3px;
+  color: var(--paper);
+}
+.p-landmark h2 .en {
+  display: block;
+  font-family: var(--sans-en);
+  font-weight: 800;
+  font-style: italic;
+  font-size: clamp(15px, 4vw, 20px);
+  letter-spacing: 4px;
+  margin-top: 14px;
+  opacity: 0.85;
+}
+.p-landmark .photo-block {
+  margin: 32px 0 30px;
+  height: 240px;
+}
+.p-landmark .body p {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.92);
+  margin-top: 16px;
+}
+.p-landmark .body p:first-child { margin-top: 0; }
+.p-landmark .seen-in {
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,0.3);
+}
+.p-landmark .seen-in .lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--paper);
+  margin-bottom: 14px;
+}
+.p-landmark .seen-in .chips {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.p-landmark .seen-in .chip {
+  display: inline-block;
+  padding: 10px 14px;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 4px;
+  font-family: var(--sans-zh);
+  font-weight: 700;
+  font-size: 13px;
+  align-self: flex-start;
+  max-width: 100%;
+}
+.p-landmark .seen-in .chip .y {
+  font-family: var(--sans-en);
+  font-weight: 900;
+  margin-right: 8px;
+}
+.p-landmark.red    .seen-in .chip .y { color: var(--red); }
+.p-landmark.orange .seen-in .chip .y { color: var(--orange); }
+.p-landmark.pink   .seen-in .chip .y { color: var(--pink); }
+.p-landmark.wine   .seen-in .chip .y { color: var(--wine); }
+.p-landmark .seen-in .chip .director {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+/* ============================================ */
+/* P21 · Contact (black bg)                     */
+/* ============================================ */
+.p-contact {
+  background: var(--night);
+  color: var(--paper);
+  padding: 110px 28px 80px;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  min-height: 100svh;
+  position: relative;
+}
+.p-contact .amca-block .logo {
+  font-family: var(--sans-en);
+  font-weight: 900;
+  font-size: 32px;
+  letter-spacing: 6px;
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.p-contact .amca-block .logo::before {
+  content: "";
+  display: block;
+  width: 26px; height: 26px;
+  background: var(--paper);
+  clip-path: polygon(35% 0, 100% 0, 100% 65%, 75% 65%, 75% 35%, 35% 35%);
+}
+.p-contact .amca-block .tagline {
+  font-family: var(--sans-en);
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: 0.65;
+  margin-top: 4px;
+  margin-left: 40px;
+}
+.p-contact .for-more {
+  margin-top: 56px;
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+  color: var(--paper);
+}
+.p-contact .info {
+  margin-top: 22px;
+  font-family: var(--sans-zh);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 2;
+  color: rgba(255,255,255,0.78);
+}
+.p-contact .info strong { color: var(--paper); font-weight: 800; }
+.p-contact .photo-area {
+  margin-top: 36px;
+  height: 280px;
+  background: linear-gradient(180deg, #1A1A1A 0%, #0A0A0A 100%);
+}
+.p-contact .btn {
+  margin-top: 36px;
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--red);
+  color: var(--paper);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-family: var(--sans-zh);
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  transition: transform .2s ease;
+}
+.p-contact .btn:active { transform: scale(0.97); }
+
+/* ============================================ */
+/* Desktop wrapper                              */
+/* ============================================ */
+@media (min-width: 700px) {
+  body { max-width: 540px; margin: 0 auto; box-shadow: 0 0 100px rgba(0,0,0,0.4); }
+  .indicator { right: calc(50% - 290px); }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">AMCA</div>
+  <div class="ticker"><span id="liveClock">PARIS · 2026</span></div>
+</header>
+
+<nav class="indicator">
+  <a href="#cover" data-target="cover" class="active"></a>
+  <a href="#program" data-target="program"></a>
+  <a href="#filmmaking" data-target="filmmaking"></a>
+  <a href="#location" data-target="location"></a>
+  <a href="#weeks" data-target="weeks"></a>
+  <a href="#acting" data-target="acting"></a>
+  <a href="#about" data-target="about"></a>
+  <a href="#excursions" data-target="excursions"></a>
+  <a href="#contact" data-target="contact"></a>
+</nav>
+
+<!-- ============================================ -->
+<!-- P1 · COVER                                   -->
+<!-- ============================================ -->
+<section id="cover" class="p-cover" data-page="1">
+  <div class="top">
+    <div class="badge reveal">★ INTERNATIONAL FILM SCHOOL IN PARIS</div>
+    <div>
+      <h1 class="reveal d1">SUMMER<br>FILM<br>PROGRAM</h1>
+      <div class="h1-sub reveal d2">表演 × 电影制作</div>
+    </div>
+    <div class="meta reveal d3">
+      ACTING & FILMMAKING<br>
+      FROM JULY 6TH TO JULY 31ST<br>
+      <span class="url">www.amcaparis.com</span>
+    </div>
+  </div>
+  <div class="photo">
+    <div class="skyline">
+      <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 420 L0 560 L800 560 L800 410 L780 410 L780 395 L760 395 L760 410 L720 410 L720 380 L700 380 L700 410 L660 410 L660 390 L640 390 L640 410 L600 410 L600 400 L580 400 L580 415 L540 420 L500 420 L500 405 L480 405 L480 415 L440 420 L380 420 L380 405 L360 405 L360 415 L290 420 L240 420 L240 408 L220 408 L220 418 L180 420 L140 420 L140 410 L120 410 L120 415 L20 420 L20 412 L0 412 Z" fill="rgba(31,2,55,0.55)"/>
+        <rect x="0" y="525" width="800" height="35" fill="rgba(76,27,94,0.4)"/>
+        <rect x="0" y="535" width="800" height="3" fill="rgba(255,180,150,0.25)"/>
+        <path d="M280 500 Q330 488 380 500 L380 525 L280 525 Z" fill="rgba(15,5,36,0.85)"/>
+        <path d="M380 500 Q430 488 480 500 L480 525 L380 525 Z" fill="rgba(15,5,36,0.85)"/>
+        <path d="M480 500 Q530 488 580 500 L580 525 L480 525 Z" fill="rgba(15,5,36,0.85)"/>
+        <g fill="rgba(15,5,36,0.92)">
+          <rect x="398" y="180" width="4" height="20"/>
+          <rect x="394" y="200" width="12" height="24"/>
+          <polygon points="386,224 414,224 410,260 390,260"/>
+          <rect x="384" y="260" width="32" height="6"/>
+          <polygon points="376,266 424,266 418,330 382,330"/>
+          <rect x="370" y="330" width="60" height="8"/>
+          <polygon points="356,338 444,338 432,440 368,440"/>
+          <path d="M356 440 L444 440 L444 500 L420 500 Q400 480 380 500 L356 500 Z"/>
+        </g>
+        <path d="M0 480 Q10 470 18 478 Q26 470 32 478 L40 478 Q48 470 56 478 L70 478 L70 525 L0 525 Z" fill="rgba(15,5,36,0.85)"/>
+        <path d="M730 478 Q740 470 748 478 Q756 470 764 478 L800 478 L800 525 L730 525 Z" fill="rgba(15,5,36,0.85)"/>
+      </svg>
+    </div>
+  </div>
+  <div class="scroll-cue">SCROLL</div>
+</section>
+
+<!-- ============================================ -->
+<!-- P2 · OUR PROGRAM                              -->
+<!-- ============================================ -->
+<section id="program" class="p-paper" data-page="2">
+  <div class="img-ph reveal" id="img-01" style="aspect-ratio:16/9;border-radius:4px;margin-bottom:28px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 01 ]</div>
+    <div class="ph-desc">原 PDF · 第 2 页：巴黎运河区街景</div>
+  </div>
+  <div class="head reveal d1">
+    <span class="tag">★ OUR PROGRAM</span>
+    <h2>关于<br>这个项目</h2>
+    <div class="sub">表演 × 电影制作</div>
+  </div>
+  <div class="body">
+    <p class="reveal d2">我们的暑期项目为你提供一次独特机会 —— 既能探索影视行业的多元职业方向，也能在追逐热爱的过程中持续打磨专业技能。这是一段为期四周的高强度沉浸式创作体验：从最初的故事构思到最终的银幕呈现，你将与一群志同道合的创作者一同生活、协作，把脑海里的角色与情节真正变成可被观看的影像。</p>
+    <p class="reveal d3">学员可以在两条专业方向中择一深耕：<strong>表演（Acting）</strong>或<strong>电影制作（Filmmaking）</strong>。无论你走哪一条路径，都能在专注本职专业的同时，深刻理解电影行业天然的协作属性 —— 整个项目期间，两个方向的学员紧密合作，并最终汇聚于一个共同的结业作品。</p>
+    <p class="reveal d4">四周结束时，你将带着新掌握的专业技能与多部参与创作的短片作品集满载离开。与扎实的实操训练并行的，是你将走遍这座"光之城" —— 巴黎本身就是你最好的灵感来源与片场。</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P3 · FILMMAKING                              -->
+<!-- ============================================ -->
+<section id="filmmaking" class="p-track-overlay" data-page="3">
+  <div class="full-photo red">
+    <div class="img-ph on-color" id="img-02">
+      <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+      <div class="ph-id">[ IMG · 02 ]</div>
+      <div class="ph-desc">原 PDF · 第 3 页：摄影机 / 拍摄现场设备特写</div>
+    </div>
+    <div class="label-block">
+      <h2 class="reveal"><span class="en">FILMMAKING</span></h2>
+    </div>
+  </div>
+  <div class="body-area">
+    <span class="accent-bar"></span>
+    <p class="reveal">AMCA 巴黎为期四周的暑期电影制作项目，覆盖编剧、导演、摄影、剪辑与声音的完整流程。课程经过精心设计，引领学员从最初的概念构思一步步走向一部完整短片的诞生。</p>
+    <p class="reveal d1">第一周聚焦电影艺术与制作的根基，包括法国电影概论、参访法国电影资料馆、当代电影深度解析及编剧工作坊；课程辅以蒙马特与凡尔赛宫的文化外拍。</p>
+    <p class="reveal d2">第二周以"巴黎即片场"为主题，进入技术工作坊与城市勘景实战；第三周专注于结业项目筹备 —— Pitch 路演辅导、行业从业者一对一会面，以一整天的实地拍摄日收尾。</p>
+    <p class="reveal d3">第四周聚焦后期 —— 精剪与调色，最终在职业评审团面前完成结业项目展演。<strong>优秀作品有机会被推送至电影节参展。</strong></p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P4 · LOCATION                                -->
+<!-- ============================================ -->
+<section id="location" class="p-color wine" data-page="4">
+  <div class="corner-mark"></div>
+  <span class="tag reveal">★ LOCATION</span>
+  <h2 class="reveal d1">学院位置<span class="en">LOCATION</span></h2>
+  <div class="body">
+    <p class="reveal d2">AMCA 校区坐落于巴黎市中心，地理位置优越、交通便利、毗邻一切日常配套，让学员既能高效学习，也能尽享校园周边丰富的城市生活。</p>
+  </div>
+  <div class="img-ph on-color reveal d3" id="img-03" style="aspect-ratio:16/9;margin-top:36px;border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 03 ]</div>
+    <div class="ph-desc">原 PDF · 第 4 页：校区外景</div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P5 · OPTIMAL ACCESSIBILITY                   -->
+<!-- ============================================ -->
+<section class="p-access" data-page="5">
+  <div class="reveal">
+    <div class="amca-mark">AMCA</div>
+    <div class="amca-sub">PARIS</div>
+  </div>
+  <div class="addr-card reveal d1">
+    <div class="addr-eyebrow">★ AMCA PARIS</div>
+    <div class="addr">11 rue de Cambrai<br>Building 26<br>75019 Paris</div>
+  </div>
+  <div class="img-ph reveal d2" id="img-04" style="aspect-ratio:16/9;margin-bottom:28px;border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div class="ph-id">[ IMG · 04 ]</div>
+    <div class="ph-desc">原 PDF · 第 5 页：园区俯视示意图</div>
+  </div>
+  <h2 class="reveal d3">交通便利<br><em>极致可达</em></h2>
+  <p class="body-text reveal d4">校区位于法兰德斯桥公园（Parc du Pont de Flandre），紧邻拉维莱特公园 —— 公共交通可轻松直达。</p>
+  <div class="transport reveal d5">
+    <div class="transport-col">
+      <h5>METRO 地铁</h5>
+      <ul>
+        <li><strong>7 号</strong>Corentin Cariou</li>
+        <li><strong>5 号</strong>Porte de la Villette</li>
+        <li><strong>3b 号</strong>Rosa Parks</li>
+      </ul>
+    </div>
+    <div class="transport-col">
+      <h5>RER · TRAM</h5>
+      <ul>
+        <li><strong>RER E</strong>Rosa Parks</li>
+        <li><strong>T3b</strong>Porte de la Villette</li>
+      </ul>
+    </div>
+    <div class="transport-col">
+      <h5>BUS</h5>
+      <ul>
+        <li>54 / 60 / 71</li>
+        <li>150 / 152</li>
+        <li>N13 / N45</li>
+      </ul>
+    </div>
+    <div class="transport-col">
+      <h5>BIKE / CAR</h5>
+      <ul>
+        <li>Vélib 公共自行车</li>
+        <li>园区自行车棚</li>
+        <li>Porte d'Aubervilliers 出口</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P6 · PULL QUOTE                              -->
+<!-- ============================================ -->
+<section class="p-pullquote" data-page="6">
+  <div class="photo-area">
+    <div class="img-ph on-color" id="img-05" style="position:absolute;inset:0;border-radius:0;border:none">
+      <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+      <div class="ph-id">[ IMG · 05 ]</div>
+      <div class="ph-desc">原 PDF · 第 6 页：法兰德斯桥水道全景</div>
+    </div>
+  </div>
+  <div class="quote-area">
+    <div class="mark reveal">"</div>
+    <div class="text reveal d1">Le Pont de Flandre,<br><em>canal d'expression</em></div>
+    <div class="gloss reveal d2">— 法兰德斯桥，是属于表达的运河 —</div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P7 · PROGRAM OVERVIEW DIVIDER               -->
+<!-- ============================================ -->
+<section id="weeks" class="p-divider" data-page="7">
+  <div class="corner-mark"></div>
+  <h2 class="reveal">PROGRAM<br>OVERVIEW</h2>
+  <div class="img-ph on-color reveal d1 photo-1" id="img-06" style="border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 06 ]</div>
+    <div class="ph-desc">原 PDF · 第 7 页：埃菲尔铁塔仰角剪影</div>
+  </div>
+  <div class="img-ph on-color reveal d2 photo-2" id="img-07" style="border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 07 ]</div>
+    <div class="ph-desc">原 PDF · 第 7 页：摄影机操作员手持监视器</div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P8 · FILMMAKING WEEK 1 & 2                  -->
+<!-- ============================================ -->
+<section class="weeks-paper" data-page="8">
+  <div class="img-ph reveal" id="img-08" style="aspect-ratio:16/9;border-radius:4px;margin-bottom:28px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 08 ]</div>
+    <div class="ph-desc">原 PDF · 第 8 页：学员在剪辑工位前协作</div>
+  </div>
+  <div class="head reveal d1">
+    <span class="accent-bar"></span>
+    <span class="tag">FILMMAKING / WEEK 1 — 2</span>
+    <h2>电影制作 · <em>第一/二周</em></h2>
+  </div>
+  <article class="week-box reveal d2">
+    <div class="week-num">WEEK 01</div>
+    <h3>电影制作的基本功</h3>
+    <span class="h3-en">FOUNDATIONS OF FILMMAKING</span>
+    <div class="day"><div class="d-num">DAY 1</div><div><strong>上午：</strong>校区欢迎仪式与项目导览。<strong>下午：</strong>法国电影概论 + 法国电影资料馆参访。</div></div>
+    <div class="day"><div class="d-num">DAY 2</div><div><strong>上午：</strong>当代法国电影深度赏析。<strong>下午：</strong>与一位职业电影人 Q&A。</div></div>
+    <div class="day"><div class="d-num">DAY 3</div><div><strong>上午：</strong>编剧基础课程。<strong>下午：</strong>探访一座传奇巴黎影院。</div></div>
+    <div class="day"><div class="d-num">DAY 4</div><div><strong>上午：</strong>剪辑工作坊。<strong>下午：</strong>分组导演实操练习。</div></div>
+    <div class="day"><div class="d-num">DAY 5</div><div><strong>上午：</strong>摄影机技术工作坊。<strong>下午：</strong>蒙马特电影朝圣（《天使爱美丽》取景）。</div></div>
+    <div class="day"><div class="d-num">DAY 6</div><div><strong>上午：</strong>导演工作坊（阻位与场面调度）。<strong>下午：</strong>凡尔赛宫文化外拍。</div></div>
+  </article>
+  <article class="week-box reveal d3">
+    <div class="week-num">WEEK 02</div>
+    <h3>把巴黎当作片场</h3>
+    <span class="h3-en">PARIS AS A FILM SET</span>
+    <div class="day"><div class="d-num">DAY 7</div><div>摄影 / 在巴黎实拍：场景勘景实战。</div></div>
+    <div class="day"><div class="d-num">DAY 8</div><div><strong>上午：</strong>拍摄实战。<strong>下午：</strong>影像论坛参访。</div></div>
+    <div class="day"><div class="d-num">DAY 9</div><div><strong>上午：</strong>编剧工作坊。<strong>下午：</strong>协作开发场景与拍摄计划。</div></div>
+    <div class="day"><div class="d-num">DAY 10</div><div><strong>上午：</strong>灯光与构图工作坊。<strong>下午：</strong>La Villette 国际电影节 + 露天观影。</div></div>
+    <div class="day"><div class="d-num">DAY 11</div><div><strong>上午：</strong>短片剧本写作。<strong>下午：</strong>实地拍摄短片片段。</div></div>
+  </article>
+</section>
+
+<!-- ============================================ -->
+<!-- P9 · FILMMAKING WEEK 3 & 4                  -->
+<!-- ============================================ -->
+<section class="weeks-paper" data-page="9">
+  <div class="img-ph reveal" id="img-09" style="aspect-ratio:16/9;border-radius:4px;margin-bottom:28px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 09 ]</div>
+    <div class="ph-desc">原 PDF · 第 9 页：剪辑室 / 后期工作站全景</div>
+  </div>
+  <div class="head reveal d1">
+    <span class="accent-bar"></span>
+    <span class="tag">FILMMAKING / WEEK 3 — 4</span>
+    <h2>电影制作 · <em>第三/四周</em></h2>
+  </div>
+  <article class="week-box reveal d2">
+    <div class="week-num">WEEK 03</div>
+    <h3>筹备与开拍</h3>
+    <span class="h3-en">PREPARATION AND FILMING</span>
+    <div class="day"><div class="d-num">DAY 12</div><div><strong>上午：</strong>与摄影 / 剪辑 / 副导演 1v1 打磨方案。<strong>下午：</strong>沿塞纳河漫步。</div></div>
+    <div class="day"><div class="d-num">DAY 13</div><div><strong>上午：</strong>剧本定稿与一对一辅导。<strong>下午：</strong>Pitch 路演与分镜彩排。</div></div>
+    <div class="day"><div class="d-num">DAY 14</div><div><strong>上午：</strong>剧本围读 + 演员对接。<strong>下午：</strong>巴黎现场演出。</div></div>
+    <div class="day"><div class="d-num">DAY 15</div><div><strong>上午：</strong>Pitch 工作坊。<strong>下午：</strong>晚宴 + 夜游灵感采风。</div></div>
+    <div class="day"><div class="d-num">DAY 16</div><div><strong>全天：</strong>正式拍摄日。</div></div>
+  </article>
+  <article class="week-box reveal d3">
+    <div class="week-num">WEEK 04</div>
+    <h3>后期与展映</h3>
+    <span class="h3-en">POST-PRODUCTION AND PRESENTATION</span>
+    <div class="day"><div class="d-num">DAY 17</div><div><strong>全天：</strong>剪辑工作坊 —— 整理素材、精修序列。</div></div>
+    <div class="day"><div class="d-num">DAY 18</div><div><strong>上午：</strong>精剪与调色。<strong>下午：</strong>评审团公开放映 + 答辩 + 闭营酒会 + 结业证书。</div></div>
+  </article>
+</section>
+
+<!-- ============================================ -->
+<!-- P10 · ACTING                                  -->
+<!-- ============================================ -->
+<section id="acting" class="p-track-overlay acting" data-page="10">
+  <div class="full-photo">
+    <div class="img-ph on-color" id="img-10">
+      <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+      <div class="ph-id">[ IMG · 10 ]</div>
+      <div class="ph-desc">原 PDF · 第 10 页：学员在剧场或排练厅群像</div>
+    </div>
+    <div class="label-block">
+      <h2 class="reveal"><span class="en">ACTING</span></h2>
+    </div>
+  </div>
+  <div class="body-area">
+    <span class="accent-bar"></span>
+    <p class="reveal">这是一段以巴黎为基地、为期四周的表演高强度沉浸训练，让你完整体验"表演工艺"的全貌。第一周通过声音、形体、即兴等工作坊，搭建作为演员所需的核心基本功 —— 课程辅以法国电影资料馆与蒙马特的文化访学。</p>
+    <p class="reveal d1">第二周转向角色塑造与镜前表演，含 self-tape 自录带与选角导演面对面指导。第三周在行业前辈带领下完成一次真正的短片拍摄，并在红磨坊享受一夜文化沉浸。</p>
+    <p class="reveal d2">最后一周聚焦职业发展：试镜技巧、行业市场化课程、与选角圈建立人脉。项目以一场面向评审团的学员作品放映与结业证书颁发收尾。<strong>整个过程中，量身定制的一对一辅导与可立即启用的人脉网，将为你的演员事业按下启动键。</strong></p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P11 · ACTING WEEK 1 & 2                      -->
+<!-- ============================================ -->
+<section class="weeks-paper acting" data-page="11">
+  <div class="img-ph reveal" id="img-11" style="aspect-ratio:16/9;border-radius:4px;margin-bottom:28px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 11 ]</div>
+    <div class="ph-desc">原 PDF · 第 11 页：学员表演课现场</div>
+  </div>
+  <div class="head reveal d1">
+    <span class="accent-bar"></span>
+    <span class="tag">ACTING / WEEK 1 — 2</span>
+    <h2>表演 · <em>第一/二周</em></h2>
+  </div>
+  <article class="week-box reveal d2">
+    <div class="week-num">WEEK 01</div>
+    <h3>基本功 · 形体声音即兴</h3>
+    <span class="h3-en">FUNDAMENTALS — BODY, VOICE, IMPROV</span>
+    <div class="day"><div class="d-num">DAY 1</div><div><strong>上午：</strong>欢迎仪式 + 即兴工作坊。<strong>下午：</strong>法国电影资料馆参访。</div></div>
+    <div class="day"><div class="d-num">DAY 2</div><div><strong>上午：</strong>试镜技巧训练。<strong>下午：</strong>"以演员视角看电影"专题 + 导演 Q&A。</div></div>
+    <div class="day"><div class="d-num">DAY 3</div><div><strong>上午：</strong>声音训练。<strong>下午：</strong>探访传奇巴黎影院。</div></div>
+    <div class="day"><div class="d-num">DAY 4</div><div><strong>上午：</strong>镜头前表演技巧。<strong>下午：</strong>分组演技 showcase。</div></div>
+    <div class="day"><div class="d-num">DAY 5</div><div><strong>上午：</strong>试镜技巧 + 模拟试镜。<strong>下午：</strong>蒙马特电影朝圣。</div></div>
+    <div class="day"><div class="d-num">DAY 6</div><div><strong>上午：</strong>形体与肢体表达。<strong>下午：</strong>凡尔赛宫参访。</div></div>
+  </article>
+  <article class="week-box reveal d3">
+    <div class="week-num">WEEK 02</div>
+    <h3>角色塑造与进阶</h3>
+    <span class="h3-en">CHARACTER DEVELOPMENT & ADVANCED</span>
+    <div class="day"><div class="d-num">DAY 7</div><div><strong>上午：</strong>舞蹈与编舞表达。<strong>下午：</strong>"用相机看巴黎"摄影练习。</div></div>
+    <div class="day"><div class="d-num">DAY 8</div><div><strong>上午：</strong>镜前表演实操。<strong>下午：</strong>影像论坛 + 巴黎晚餐。</div></div>
+    <div class="day"><div class="d-num">DAY 9</div><div><strong>上午：</strong>进阶即兴。<strong>下午：</strong>self-tape 自录带拍摄。</div></div>
+    <div class="day"><div class="d-num">DAY 10</div><div><strong>上午：</strong>情绪 / 感官 / 聆听三重训练。<strong>下午：</strong>导演会面 + La Villette 露天观影。</div></div>
+    <div class="day"><div class="d-num">DAY 11</div><div><strong>上午：</strong>角色塑造进阶。<strong>下午：</strong>双人对戏镜前实战。</div></div>
+  </article>
+</section>
+
+<!-- ============================================ -->
+<!-- P12 · ACTING WEEK 3 & 4                      -->
+<!-- ============================================ -->
+<section class="weeks-paper acting" data-page="12">
+  <div class="img-ph reveal" id="img-12" style="aspect-ratio:16/9;border-radius:4px;margin-bottom:28px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 12 ]</div>
+    <div class="ph-desc">原 PDF · 第 12 页：学员舞台展演现场</div>
+  </div>
+  <div class="head reveal d1">
+    <span class="accent-bar"></span>
+    <span class="tag">ACTING / WEEK 3 — 4</span>
+    <h2>表演 · <em>第三/四周</em></h2>
+  </div>
+  <article class="week-box reveal d2">
+    <div class="week-num">WEEK 03</div>
+    <h3>彩排与终极展演</h3>
+    <span class="h3-en">REHEARSAL AND FINAL PERFORMANCE</span>
+    <div class="day"><div class="d-num">DAY 12</div><div><strong>上午：</strong>选角导演会面。<strong>下午：</strong>沿塞纳河漫步。</div></div>
+    <div class="day"><div class="d-num">DAY 13</div><div><strong>上午：</strong>导演与场景准备。<strong>下午：</strong>终极现场展演。</div></div>
+    <div class="day"><div class="d-num">DAY 14</div><div><strong>上午：</strong>剧本围读 + 团队对接。<strong>夜晚：</strong>红磨坊文化沉浸。</div></div>
+    <div class="day"><div class="d-num">DAY 15</div><div><strong>上午：</strong>即兴与角色发展。<strong>下午：</strong>勘景 / 服装 / 制作准备。</div></div>
+    <div class="day"><div class="d-num">DAY 16</div><div><strong>全天：</strong>实地拍摄日。</div></div>
+  </article>
+  <article class="week-box reveal d3">
+    <div class="week-num">WEEK 04</div>
+    <h3>职业发展与展示</h3>
+    <span class="h3-en">PROFESSIONAL DEVELOPMENT & PRESENTATION</span>
+    <div class="day"><div class="d-num">DAY 17</div><div><strong>上午：</strong>行业市场化课程。<strong>下午：</strong>职业发展 1v1。</div></div>
+    <div class="day"><div class="d-num">DAY 18</div><div><strong>上午：</strong>终极彩排。<strong>下午：</strong>公开放映 + 评审反馈。<strong>夜晚：</strong>闭营酒会 + 结业证书颁发。</div></div>
+  </article>
+</section>
+
+<!-- ============================================ -->
+<!-- P13 · ABOUT AMCA                              -->
+<!-- ============================================ -->
+<section id="about" class="p-about" data-page="13">
+  <div class="amca-block reveal">
+    <div class="logo">AMCA</div>
+    <div class="tagline">Académie des Métiers du Cinéma et de l'Audiovisuel</div>
+  </div>
+  <div class="body">
+    <p class="reveal d1">AMCA 是一所坐落于巴黎第 19 区的国际电影学院。我们的与众不同体现在一种独特的教育哲学 —— 行业里那些"还在一线开机"的从业者，亲自带你入行。</p>
+    <p class="reveal d2">如果你梦想以任何一种方式参与到电影世界的创造之中，AMCA 都是为你准备的舞台。加入我们，沉浸进一个让创意与创新成为每一个项目底色的世界。</p>
+  </div>
+  <div class="facility-grid">
+    <div class="img-ph on-color span-2 reveal d3" id="img-13">
+      <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+      <div class="ph-id">[ IMG · 13 ]</div>
+      <div class="ph-desc">放映厅 / 阶梯教室</div>
+    </div>
+    <div class="img-ph on-color reveal d4" id="img-14">
+      <div class="ph-id">[ IMG · 14 ]</div>
+      <div class="ph-desc">校区外景</div>
+    </div>
+    <div class="img-ph on-color reveal d4" id="img-15">
+      <div class="ph-id">[ IMG · 15 ]</div>
+      <div class="ph-desc">剪辑机房</div>
+    </div>
+    <div class="img-ph on-color reveal d5" id="img-16">
+      <div class="ph-id">[ IMG · 16 ]</div>
+      <div class="ph-desc">表演 / 排练厅</div>
+    </div>
+    <div class="img-ph on-color reveal d5" id="img-17">
+      <div class="ph-id">[ IMG · 17 ]</div>
+      <div class="ph-desc">教室 / 工作室</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P14 · EXCURSIONS DIVIDER                      -->
+<!-- ============================================ -->
+<section id="excursions" class="p-color red" data-page="14">
+  <div class="corner-mark"></div>
+  <span class="tag reveal">★ PROGRAM EXCURSIONS</span>
+  <h2 class="reveal d1">透过电影<br>与文化探索<br>巴黎<span class="en">EXPLORING PARIS</span></h2>
+  <div class="body">
+    <p class="reveal d2">课程外拍 —— 走出教室，把整座巴黎当成你的电影博物馆。以下 6 个城市地标，每一个既是巴黎的视觉记忆，也是电影史上的经典取景地。</p>
+  </div>
+  <div class="img-ph on-color reveal d3" id="img-18" style="aspect-ratio:16/9;margin-top:32px;border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div class="ph-id">[ IMG · 18 ]</div>
+    <div class="ph-desc">原 PDF · 第 14 页：巴黎航拍 / 城市俯瞰</div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P15 · EIFFEL TOWER                            -->
+<!-- ============================================ -->
+<section class="p-landmark p-color orange" data-page="15">
+  <div class="corner-mark"></div>
+  <span class="tag reveal">★ EXCURSION 01</span>
+  <h2 class="reveal d1">埃菲尔铁塔<span class="en">EIFFEL TOWER</span></h2>
+  <div class="img-ph on-color reveal d2" id="img-19" style="aspect-ratio:3/4;border-radius:4px;height:auto">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 19 ]</div>
+    <div class="ph-desc">原 PDF · 第 15 页：埃菲尔铁塔仰角</div>
+  </div>
+  <div class="body">
+    <p class="reveal d3">埃菲尔铁塔是巴黎最负盛名的地标，也是世界上最具辨识度的建筑之一。1889 年由古斯塔夫·埃菲尔为世博会设计建成，高约 330 米。她以独一无二的钢铁结构闻名于世，从塔顶望出去的城市全景令人屏息 —— 时至今日，每年仍吸引数以百万计的访客前来朝圣。</p>
+  </div>
+  <div class="seen-in reveal d4">
+    <div class="lbl">★ SEEN IN</div>
+    <div class="chips">
+      <div class="chip"><span class="y">2018</span>《碟中谍：全面瓦解》<span class="director">克里斯托弗·麦奎里 执导</span></div>
+      <div class="chip"><span class="y">1959</span>《四百击》<span class="director">弗朗索瓦·特吕弗 执导</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P16 · VERSAILLES                              -->
+<!-- ============================================ -->
+<section class="p-landmark p-color pink" data-page="16">
+  <div class="corner-mark"></div>
+  <span class="tag reveal">★ EXCURSION 02</span>
+  <h2 class="reveal d1">凡尔赛宫<span class="en">VERSAILLES</span></h2>
+  <div class="img-ph on-color reveal d2 photo-block" id="img-20" style="border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 20 ]</div>
+    <div class="ph-desc">原 PDF · 第 16 页：凡尔赛宫主殿外景 + 雕像</div>
+  </div>
+  <div class="body">
+    <p class="reveal d3">凡尔赛宫是世界上最负盛名的皇家宫邸之一，坐落在巴黎近郊。最初是一座狩猎行宫，17 世纪由路易十四改建为辉煌至极的宫殿建筑群。她以宏伟的建筑、奢华的内饰、震撼人心的镜厅以及壮丽庞大的法式园林闻名于世。</p>
+  </div>
+  <div class="seen-in reveal d4">
+    <div class="lbl">★ SEEN IN</div>
+    <div class="chips">
+      <div class="chip"><span class="y">2006</span>《绝代艳后》<span class="director">索菲亚·科波拉 执导</span></div>
+      <div class="chip"><span class="y">1988</span>《危险关系》<span class="director">斯蒂芬·弗雷斯 执导</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P17 · CAFÉ DES DEUX MOULINS                   -->
+<!-- ============================================ -->
+<section class="p-landmark p-color wine" data-page="17">
+  <div class="corner-mark"></div>
+  <span class="tag reveal">★ EXCURSION 03</span>
+  <h2 class="reveal d1">双风车咖啡馆<span class="en">CAFÉ DES DEUX MOULINS</span></h2>
+  <div class="img-ph on-color reveal d2 photo-block" id="img-21" style="border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 21 ]</div>
+    <div class="ph-desc">原 PDF · 第 17 页：咖啡馆室内 + 服务员场景</div>
+  </div>
+  <div class="body">
+    <p class="reveal d3">双风车咖啡馆是一家位于蒙马特心脏地带的传统巴黎咖啡馆，因电影《天使爱美丽》（让-皮埃尔·热内 执导）而走红全球 —— 影片中艾米莉·波兰就是在这家咖啡馆当服务员。许多场景就在这里实地取景，时至今日，访客仍能一眼认出影片里的特定细节。</p>
+  </div>
+  <div class="seen-in reveal d4">
+    <div class="lbl">★ SEEN IN</div>
+    <div class="chips">
+      <div class="chip"><span class="y">2001</span>《天使爱美丽》<span class="director">让-皮埃尔·热内 执导</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P18 · MOULIN ROUGE                            -->
+<!-- ============================================ -->
+<section class="p-landmark p-color orange" data-page="18">
+  <div class="corner-mark"></div>
+  <span class="tag reveal">★ EXCURSION 04</span>
+  <h2 class="reveal d1">红磨坊<span class="en">THE MOULIN ROUGE</span></h2>
+  <div class="img-ph on-color reveal d2 photo-block" id="img-22" style="border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 22 ]</div>
+    <div class="ph-desc">原 PDF · 第 18 页：红磨坊夜景 + 红色风车</div>
+  </div>
+  <div class="body">
+    <p class="reveal d3">红磨坊是世界上最负盛名的歌舞表演场所之一，坐落于蒙马特山脚下，屋顶那架标志性的红色风车已是巴黎的视觉符号。她于 1889 年开业，迅速成为巴黎"美好年代"夜生活、娱乐与艺术自由的代名词 —— 历史上她吸引过无数艺术家、作家与表演者，包括以红磨坊为灵感创作了海量海报作品的亨利·德·图卢兹-罗特列克。</p>
+  </div>
+  <div class="seen-in reveal d4">
+    <div class="lbl">★ SEEN IN</div>
+    <div class="chips">
+      <div class="chip"><span class="y">2001</span>《红磨坊!》<span class="director">巴兹·鲁赫曼 执导</span></div>
+      <div class="chip"><span class="y">1955</span>《法国康康舞》<span class="director">让·雷诺阿 执导</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P19 · CINÉMATHÈQUE FRANÇAISE                  -->
+<!-- ============================================ -->
+<section class="p-landmark p-color red" data-page="19">
+  <div class="corner-mark"></div>
+  <span class="tag reveal">★ EXCURSION 05</span>
+  <h2 class="reveal d1">法国电影资料馆<span class="en">CINÉMATHÈQUE FRANÇAISE</span></h2>
+  <div class="img-ph on-color reveal d2 photo-block" id="img-23" style="border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 23 ]</div>
+    <div class="ph-desc">原 PDF · 第 19 页：弗兰克·盖里设计建筑外景</div>
+  </div>
+  <div class="body">
+    <p class="reveal d3">法国电影资料馆是全世界最重要的电影历史与电影保护机构之一，建筑由弗兰克·盖里（Frank Gehry）设计，本身就是一件艺术品。1936 年由亨利·朗格卢瓦创立，长期收藏、保护并向世界推介来自全球的电影作品。</p>
+    <p class="reveal d3">资料馆深刻影响了法国电影文化的形成，尤其塑造了"法国新浪潮"运动 —— 那些后来成为新浪潮一代大导演的年轻影评人，曾在这里度过无数个研究经典老片的夜晚。</p>
+  </div>
+  <div class="seen-in reveal d4">
+    <div class="lbl">★ SEEN IN</div>
+    <div class="chips">
+      <div class="chip"><span class="y">2003</span>《戏梦巴黎》<span class="director">贝纳尔多·贝托鲁奇 执导</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P20 · LE GRAND REX                            -->
+<!-- ============================================ -->
+<section class="p-landmark p-color wine" data-page="20">
+  <div class="corner-mark"></div>
+  <span class="tag reveal">★ EXCURSION 06</span>
+  <h2 class="reveal d1">大雷克斯影院<span class="en">LE GRAND REX</span></h2>
+  <div class="img-ph on-color reveal d2 photo-block" id="img-24" style="border-radius:4px;margin-bottom:14px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 24 ]</div>
+    <div class="ph-desc">原 PDF · 第 20 页：影院霓虹外立面</div>
+  </div>
+  <div class="img-ph on-color reveal d3 photo-block" id="img-25" style="border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 25 ]</div>
+    <div class="ph-desc">原 PDF · 第 20 页：Art Deco 内景 + 星空天顶</div>
+  </div>
+  <div class="body">
+    <p class="reveal d4">大雷克斯影院是巴黎最负盛名的影院之一，坐落于 Grands Boulevards 大道。她于 1932 年开业，以雄伟的装饰艺术（Art Deco）建筑风格著称 —— 巨型放映厅与缀满"星空"的天顶，让每一次观影都更像一次仪式。这里也是常年举办首映礼、电影盛事与各类影展的重镇。</p>
+    <p class="reveal d4">大雷克斯也在塑造法国电影文化的过程中扮演了关键角色，与新浪潮运动深度交织。</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- P21 · CONTACT                                 -->
+<!-- ============================================ -->
+<section id="contact" class="p-contact" data-page="21">
+  <div class="amca-block reveal">
+    <div class="logo">AMCA</div>
+    <div class="tagline">Académie des Métiers du Cinéma et de l'Audiovisuel</div>
+  </div>
+  <div class="for-more reveal d1">For more information</div>
+  <div class="info reveal d2">
+    AMCA PARIS<br>
+    11 rue de Cambrai · Building 26 · 75019 Paris<br>
+    <strong>Tel</strong> +33 1 40 18 00 01<br>
+    <strong>Email</strong> inscriptions@amcaparis.com<br>
+    <strong>Web</strong> www.amcaparis.com
+  </div>
+  <div class="img-ph on-color reveal d3" id="img-26" style="margin-top:36px;height:280px;border-radius:4px">
+    <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="ph-id">[ IMG · 26 ]</div>
+    <div class="ph-desc">原 PDF · 第 21 页：埃菲尔铁塔黑白特写</div>
+  </div>
+  <a href="mailto:inscriptions@amcaparis.com" class="btn reveal d4">立即咨询 · APPLY NOW</a>
+</section>
+
+<script>
+// =====================================================
+// Reveal observer
+// =====================================================
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+}
+
+// =====================================================
+// Auto-load cover photo from /images/cover.{ext}
+// =====================================================
+(function autoLoadCover() {
+  const cover = document.getElementById('cover');
+  if (!cover) return;
+  const exts = ['jpg', 'jpeg', 'png', 'webp', 'avif'];
+  let i = 0;
+  const tryNext = () => {
+    if (i >= exts.length) return;
+    const probe = new Image();
+    probe.onload = () => {
+      cover.style.setProperty('--cover-photo', `url('${probe.src}')`);
+      cover.classList.add('has-photo');
+    };
+    probe.onerror = () => { i++; tryNext(); };
+    probe.src = `images/cover.${exts[i]}`;
+  };
+  tryNext();
+})();
+
+// =====================================================
+// Auto-load real images from /images/ when available
+// =====================================================
+(function autoLoadImages() {
+  const placeholders = document.querySelectorAll('.img-ph[id^="img-"]');
+  const exts = ['jpg', 'jpeg', 'png', 'webp', 'avif'];
+  placeholders.forEach(ph => {
+    const id = ph.id;
+    let i = 0;
+    const tryNext = () => {
+      if (i >= exts.length) return;
+      const probe = new Image();
+      probe.onload = () => {
+        const desc = ph.querySelector('.ph-desc');
+        const altText = desc ? desc.innerText.replace(/\s+/g, ' ').trim() : id;
+        ph.classList.add('img-loaded');
+        const img = document.createElement('img');
+        img.src = probe.src;
+        img.alt = altText;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        ph.appendChild(img);
+        requestAnimationFrame(() => img.classList.add('shown'));
+      };
+      probe.onerror = () => { i++; tryNext(); };
+      probe.src = `images/${id}.${exts[i]}`;
+    };
+    tryNext();
+  });
+})();
+
+// =====================================================
+// Page indicator + smooth scroll
+// =====================================================
+const chapterMap = {
+  cover: 'cover',
+  program: 'program',
+  filmmaking: 'filmmaking',
+  location: 'location',
+  weeks: 'weeks',
+  acting: 'acting',
+  about: 'about',
+  excursions: 'excursions',
+  contact: 'contact',
+};
+const sections = document.querySelectorAll('section[data-page]');
+const indicators = document.querySelectorAll('.indicator a');
+if ('IntersectionObserver' in window) {
+  const sio = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id || '';
+        const chapter = chapterMap[id];
+        if (!chapter) return;
+        indicators.forEach(a => a.classList.toggle('active', a.dataset.target === chapter));
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => sio.observe(s));
+}
+indicators.forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.getElementById(a.dataset.target);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// =====================================================
+// Paris time ticker
+// =====================================================
+function updateClock() {
+  const now = new Date();
+  const parisTime = now.toLocaleTimeString('en-US', { timeZone: 'Europe/Paris', hour12: false, hour: '2-digit', minute: '2-digit' });
+  const el = document.getElementById('liveClock');
+  if (el) el.textContent = `PARIS · ${parisTime}`;
+}
+updateClock();
+setInterval(updateClock, 30000);
+</script>
+
+</body>
+</html>
